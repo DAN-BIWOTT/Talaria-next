@@ -66,8 +66,8 @@ export function useWorkouts() {
     setWorkouts((prev) => [...prev, newWorkout]);
   };
 
-  const update = async (payload: any) => {
-    const updated = await workoutService.update(payload);
+  const update = async (id: number ,payload: any) => {
+    const updated = await workoutService.update(id, payload);
     setWorkouts((prev) =>
       prev.map((w) => (w.id === updated.id ? updated : w))
     );

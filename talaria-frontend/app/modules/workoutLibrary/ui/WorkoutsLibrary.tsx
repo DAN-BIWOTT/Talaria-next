@@ -19,7 +19,6 @@ import { workoutService } from "../services/workout.service";
 export default function WorkoutsLibrary() {
   const [showForm, setShowForm] = useState(false);
   const [editingWorkout, setEditingWorkout] = useState<number | null>(null);
-const [exerciseList, setExerciseList] = useState<Exercise[]>([]);
 
   // Local state until backend is connected
 const [workouts, setWorkouts] = useState<any[]>([]);
@@ -53,15 +52,7 @@ useEffect(() => {
     }
 
     // Muscle filter (example logic)
-   if (muscleFilter !== "all") {
-  list = list.filter((w) =>
-    w.exercises.some((ex) => {
-      const ref = exercises.find((e) => e.id === ex.id);
 
-      return ref?.muscleGroups?.includes(muscleFilter);
-    })
-  );
-}
 
 
 
@@ -208,8 +199,8 @@ useEffect(() => {
 
                   {/* List */}
                   <ul className="text-sm text-gray-700 space-y-1 mt-2">
-                    {w.exercises.slice(0, 3).map((ex) => {
-                      const ref = exercises.find((e) => e.id === ex.id);
+                    {w.exercises.slice(0, 3).map((ex: any) => {
+                      const ref = ex.find((e: any) => e.id === ex.id);
                       return (
                         <li key={ex.id} className="truncate text-gray-700">
                           {ref?.name}
@@ -251,42 +242,7 @@ useEffect(() => {
       </div>
 
       {/* ===== Create/Edit Modal ===== */}
-{showForm && (
-  <WorkoutForm
-    editingWorkout={workouts.find((w) => w.id === editingWorkout) ?? null}
-    exercises={exercises} // <-- fetched from DB
-    onClose={() => {
-      setShowForm(false);
-      setEditingWorkout(null);
-    }}
-    onSave={async (payload) => {
-  try {
-    let saved;
 
-    if ("id" in payload) {
-      // UPDATE
-      saved = await workoutService.update(payload.id, payload);
-    } else {
-      // CREATE
-      saved = await workoutService.create(payload);
-    }
-
-    setWorkouts((prev: any) => {
-      const exists = prev.find((w: any) => w.id === saved.id);
-      return exists
-        ? prev.map((w: any) => (w.id === saved.id ? saved : w))
-        : [...prev, saved];
-    });
-  } catch (err) {
-    console.error("Failed to save workout", err);
-  } finally {
-    setShowForm(false);
-    setEditingWorkout(null);
-  }
-}}
-
-  />
-)}
 
     </div>
   );
