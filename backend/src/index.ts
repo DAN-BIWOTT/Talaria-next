@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin:  ["http://localhost:3000","http://192.168.0.61:3000"],
+  origin:  ["https://talaria-next-icicf8ax7-danbiwotts-projects.vercel.app/","http://localhost:3000","http://192.168.0.61:3000"],
   credentials: true,
 }));
 
