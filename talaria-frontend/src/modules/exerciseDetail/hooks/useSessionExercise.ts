@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { SessionExerciseSchema, SessionExerciseType } from "../schema/sessionExercise.schema";
+import { API_URL } from "@/utils/api";
 
 export function useSessionExercise(exerciseId: number | null) {
   const [exercise, setExercise] = useState<SessionExerciseType | null>(null);
@@ -17,7 +18,7 @@ export function useSessionExercise(exerciseId: number | null) {
 
       try {
         const response = await fetch(
-          `http://localhost:5000/api/sessions/exercise/${exerciseId}`,
+          `${API_URL}/api/sessions/exercise/${exerciseId}`,
           { credentials: "include" }
         );
 
