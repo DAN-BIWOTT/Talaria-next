@@ -4,10 +4,10 @@ import tailwindcssAnimate from "tailwindcss-animate";
 export default {
   darkMode: "class",
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",        // ← your real app folder
-    "./components/**/*.{js,ts,jsx,tsx,mdx}", // ← shadcn components folder
-    "./modules/**/*.{js,ts,jsx,tsx,mdx}",    // ← you are using modules/*
-    "./lib/**/*.{js,ts,jsx,tsx,mdx}",        // ← utilities
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",        // ← your real app folder
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}", // ← shadcn components folder
+    "./src/modules/**/*.{js,ts,jsx,tsx,mdx}",    // ← you are using modules/*
+    "./src/lib/**/*.{js,ts,jsx,tsx,mdx}",        // ← utilities
   ],
   theme: {
     extend: {
